@@ -16,3 +16,10 @@
 2025-04-13 10:57:11,352 - INFO - 10464 - MainThread - Generated array: [810, 83, 874, 870, 848, 643, 849, 545, 957, 725]
 2025-04-13 10:57:11,695 - INFO - 11120 - MainThread -  Sorting from index 0 to 10
 2025-04-13 10:57:11,700 - INFO - 11120 - Thread-1 (save_part) - Saved sorted array to sorted_part_0.txt
+2025-04-15 13:05:58,137 - INFO - 2520 - MainThread - Generated array: [326, 456, 543, 781, 763, 341, 698, 547, 618, 42, 94, 736, 194, 211, 726, 897, 546, 58, 581, 221]
+2025-04-15 13:06:05,691 - INFO - 12752 - MainThread -  Sorting from index 0 to 20
+2025-04-15 13:06:05,746 - INFO - 12752 - Thread-1 (save_part) - Saved sorted array to sorted_part_0.txt
+2025-04-15 13:08:59,430 - INFO - 3096 - MainThread - Generated array: [678, 845, 75, 312, 639, 837, 271, 615, 159, 122, 99, 448, 446, 390, 346, 137, 898, 762, 598, 652]
+2025-04-15 13:08:59,973 - INFO - 13540 - MainThread - Sorting from index 0 to 20
+2025-04-15 13:08:59,982 - INFO - 13540 - Thread-1 (save_part) - Saved sorted array to sorted_part_0.txt
+2025-04-15 13:09:00,107 - INFO - 3096 - MainThread - Saved sorted array to final_sorted_array.txt

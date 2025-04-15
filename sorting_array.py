@@ -21,18 +21,28 @@ def save_part(output_filename, data):
     logging.info(f'Saved sorted array to {output_filename}')
 
 
+def merge_sorted_arrays(sorted_arrays):
+    merged_array = []
+    for arr in sorted_arrays:
+        merged_array.extend(arr)
+    return simple_sort(merged_array)
+
 def worker(input_queue, data, process_index):
+    sorted_parts = []
     while True:
         start, end = input_queue.get()
         if start == end == -1:
             break
 
-        logging.info(f' Sorting from index {start} to {end}')
+        logging.info(f'Sorting from index {start} to {end}')
         result = simple_sort(data[start:end])
+        sorted_parts.append(result)
 
         output_filename = f'sorted_part_{process_index}.txt'
         saver_thread = threading.Thread(target=save_part, args=(output_filename, result))
         saver_thread.start()
+
+    return sorted_parts
 
 
 def main():
@@ -52,13 +62,13 @@ def main():
         print("Недостаточно доступных ресурсов CPU для запуска процессов.")
         return
 
-
     data = [random.randint(0, 1000) for _ in range(user_input_elements)]
     logging.info(f'Generated array: {data}')
 
     input_queue = multiprocessing.Queue()
-
     processes = []
+    sorted_parts = []
+    
     for i in range(num_processes):
         p = multiprocessing.Process(target=worker, args=(input_queue, data, i))
         processes.append(p)
@@ -76,8 +86,15 @@ def main():
     for p in processes:
         p.join()
 
+    sorted_parts = [open(f'sorted_part_{i}.txt').read().strip().split() for i in range(num_processes)]
+    sorted_parts = [list(map(int, arr)) for arr in sorted_parts]
+    
+    final_sorted_array = merge_sorted_arrays(sorted_parts)
 
-    print("Сортировка завершена. Результаты сохранены в отдельных файлах.")
+    final_output_filename = 'final_sorted_array.txt'
+    save_part(final_output_filename, final_sorted_array)
+
+    print("Сортировка завершена.")
 
 
 if __name__ == '__main__':
